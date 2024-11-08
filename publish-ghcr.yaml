@@ -1,0 +1,15 @@
+name: Docker Image CI for GHCR
+
+on:
+  push
+
+jobs:
+  builds_and_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Builds and push the Image
+        run: |
+          docker login --username mates182 --password ${{ secrets.GH_PAT }} ghcr.io
+          docker build . --tag ghcr.io/mates182/prueba:latest
+          docker push ghcr.io/mates182/prueba:latest
