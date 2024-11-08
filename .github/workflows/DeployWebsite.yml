@@ -22,7 +22,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: mates182/CS.Holaxd
+          images: ghcr.io/mates182/prueba:latest
       
       - name: Save metadata outputs to GITHUB_STATE and GITHUB_OUTPUT
         run: |
