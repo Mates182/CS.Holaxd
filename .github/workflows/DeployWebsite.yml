@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - 'src/**'
+      - './**'
 jobs:
   deploy:
     name: Docker build
@@ -19,7 +19,7 @@ jobs:
           password: secrets.DOCKERHUB_TOKEN }}
       - name: Build website image
         run: |
-           docker build --platform linux --tag ghcr.io/mates182/prueba:latest -f src/Dockerfile . 
+           docker build --platform linux --tag ghcr.io/mates182/prueba:latest -f ./Dockerfile . 
       - name: Publish website image
         run: |
            docker push ghcr.io/mates182/prueba:latest
