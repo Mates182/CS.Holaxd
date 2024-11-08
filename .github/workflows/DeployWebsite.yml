@@ -1,20 +1,20 @@
-name: build and push a docker image with docker compose into docker hub
+name: Python application
 
 on:
   push:
-    branches: [ main ]
-
+   branches: [ master ]
+  pull_request:
+    branches: [ master ]
+      
 jobs:
   build:
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-      - name: Build docker images
-        run: docker build
-      - name: log to docker hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-      - name: tag image
-        run: docker tag dockervolume-backend:1.0 mates182/CS.Holaxd
-      - name: push to docker hub tests
-        run: docker push mates182/CS.Holaxd
+    - uses: actions/checkout@v1
+    - name: Build & Push Image
+      run: |
+        echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "mates182" --password-stdin
+        docker image build -t mates182/CS.Holaxd:latest .
+        docker push mates182/CS.Holaxd:latest
